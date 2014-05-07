@@ -1,4 +1,4 @@
-puppet Omnibus project
+Puppet Omnibus project
 ======================
 This project creates full-stack platform-specific packages for
 `puppet`!
