@@ -1,8 +1,6 @@
 name "zlib"
 version "1.2.8"
 
-dependency "libgcc"
-
 version "1.2.8" do
   source md5: "44d667c142d7cda120332623eab69f40"
 end
