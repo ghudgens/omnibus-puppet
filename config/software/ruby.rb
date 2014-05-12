@@ -19,7 +19,7 @@ dependency "gdbm"
 dependency "libgcc"
 
 version "2.0.0-p451" do
-  source sha256: "5bf8a1c7616286b9dbc962912c3f58e67bc3a70306ca90b0882ef0bd442e02f5"
+  source md5: "908e4d1dbfe7362b15892f16af05adf8"
 end
 
 source url: "http://cache.ruby-lang.org/pub/ruby/#{version.match(/^(\d+\.\d+)/)[0]}/ruby-#{version}.tar.gz"
