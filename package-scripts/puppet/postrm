@@ -4,6 +4,11 @@
 # after package is uninstalled.
 #
 
+PREFIX="/usr"
+
+rm -f $PREFIX/bin/puppet
+rm -f $PREFIX/bin/facter
+
 echo "puppet has been uninstalled!"
 
 exit 0
