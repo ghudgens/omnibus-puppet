@@ -16,28 +16,24 @@
 #
 name "util-macros"
 default_version "1.18.0"
+homepage "http://http://www.x.org/"
 
-source :url => 'http://xorg.freedesktop.org/releases/individual/util/util-macros-1.18.0.tar.gz',
-  :md5 => 'fd0ba21b3179703c071bbb4c3e5fb0f4'
+version "1.18.0" do
+  source md5: "fd0ba21b3179703c071bbb4c3e5fb0f4"
+end
 
-relative_path 'util-macros-1.18.0'
+source url: "http://xorg.freedesktop.org/releases/individual/util/util-macros-#{version}.tar.gz"
 
-configure_env =
-  case platform
-  when "mac_os_x"
-    {
-      "LDFLAGS" => "-L#{install_dir}/embedded/lib -I#{install_dir}/embedded/include",
-      "CFLAGS" => "-I#{install_dir}/embedded/include -L#{install_dir}/embedded/lib"
-    }
-  else
-    {
-      "LDFLAGS" => "-L#{install_dir}/embedded/lib -I#{install_dir}/embedded/include",
-      "CFLAGS" => "-I#{install_dir}/embedded/include -L#{install_dir}/embedded/lib"
-    }
-  end
+relative_path "util-macros-#{version}"
+
+env = "LDFLAGS" => "-L#{install_dir}/embedded/lib -I#{install_dir}/embedded/include",
+      "CFLAGS" => "-L#{install_dir}/embedded/lib -I#{install_dir}/embedded/include"
 
 build do
-  command "./configure --prefix=#{install_dir}/embedded", :env => configure_env
-  command "make -j #{max_build_jobs}", :env => configure_env
-  command "make -j #{max_build_jobs} install", :env => configure_env
+  configure_command = ["./configure",
+                       "--prefix=#{install_dir}/embedded"]
+  command configure_command.join(" "), :env => env
+  
+  command "make", :env => env
+  command "make install", :env => env
 end

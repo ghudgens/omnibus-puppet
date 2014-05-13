@@ -15,7 +15,8 @@
 # limitations under the License.
 #
 name "libedit"
-version "20130712-3.1"
+default_version "20130712-3.1"
+homepage "http://thrysoee.dk/editline/"
 
 dependency "ncurses"
 
@@ -27,32 +28,17 @@ source url: "http://www.thrysoee.dk/editline/libedit-#{version}.tar.gz"
 
 relative_path "libedit-#{version}"
 
-env = case platform
-      when "aix"
-        {
-          "CC" => "xlc -q64",
-          "CXX" => "xlC -q64",
-          "LD" => "ld -b64",
-          "CFLAGS" => "-q64 -I#{install_dir}/embedded/include -O",
-          "CXXFLAGS" => "-q64 -I#{install_dir}/embedded/include -O",
-          "OBJECT_MODE" => "64",
-          "ARFLAGS" => "-X64 cru",
-          "M4" => "/opt/freeware/bin/m4",
-          "LDFLAGS" => "-q64 -L#{install_dir}/embedded/lib -Wl,-blibpath:#{install_dir}/embedded/lib:/usr/lib:/lib",
-        }
-      else
-        {
-          "LDFLAGS" => "-L#{install_dir}/embedded/lib -I#{install_dir}/embedded/include -I#{install_dir}/embedded/include/ncurses",
-          "CFLAGS" => "-L#{install_dir}/embedded/lib -I#{install_dir}/embedded/include -I#{install_dir}/embedded/include/ncurses",
-          "LD_RUN_PATH" => "#{install_dir}/embedded/lib",
-          "LD_OPTIONS" => "-R#{install_dir}/embedded/lib"
-        }
-      end
+env = "LDFLAGS" => "-L#{install_dir}/embedded/lib -I#{install_dir}/embedded/include -I#{install_dir}/embedded/include/ncurses",
+      "CFLAGS" => "-I#{install_dir}/embedded/include -L#{install_dir}/embedded/lib -I#{install_dir}/embedded/include/ncurses",
+      "LD_RUN_PATH" => "#{install_dir}/embedded/lib",
+      "LD_OPTIONS" => "-R#{install_dir}/embedded/lib"
 
 build do
-  command ["./configure",
-           "--prefix=#{install_dir}/embedded"
-           ].join(" "), :env => env
-  command "make -j #{max_build_jobs}", :env => env
-  command "make -j #{max_build_jobs} install"
+
+  configure_command = ["./configure",
+                       "--prefix=#{install_dir}/embedded"]
+  command configure_command.join(" "), :env => env
+  
+  command "make", :env => env
+  command "make install", :env => env
 end

@@ -15,29 +15,25 @@
 # limitations under the License.
 #
 name "libyaml"
-version '0.1.6'
+default_version "0.1.6"
+homepage "http://pyyaml.org/wiki/LibYAML"
 
-source :url => "http://pyyaml.org/download/libyaml/yaml-#{version}.tar.gz",
-       :md5 => '5fe00cda18ca5daeb43762b80c38e06e'
+version "0.1.6" do
+  source md5: "5fe00cda18ca5daeb43762b80c38e06e"
+end
+
+source url: "http://pyyaml.org/download/libyaml/yaml-#{version}.tar.gz"
 
 relative_path "yaml-#{version}"
 
-configure_env =
-  case platform
-  when "mac_os_x"
-    {
-      "LDFLAGS" => "-L#{install_dir}/embedded/lib -I#{install_dir}/embedded/include",
-      "CFLAGS" => "-I#{install_dir}/embedded/include -L#{install_dir}/embedded/lib"
-    }
-  else
-    {
-      "LDFLAGS" => "-L#{install_dir}/embedded/lib -I#{install_dir}/embedded/include",
-      "CFLAGS" => "-I#{install_dir}/embedded/include -L#{install_dir}/embedded/lib"
-    }
-  end
+env = "LDFLAGS" => "-L#{install_dir}/embedded/lib -I#{install_dir}/embedded/include",
+      "CFLAGS" => "-L#{install_dir}/embedded/lib -I#{install_dir}/embedded/include"
 
 build do
-  command "./configure --prefix=#{install_dir}/embedded", :env => configure_env
-  command "make -j #{max_build_jobs}", :env => configure_env
-  command "make -j #{max_build_jobs} install", :env => configure_env
+  configure_command = ["./configure",
+                       "--prefix=#{install_dir}/embedded"]
+  command configure_command.join(" "), :env => env
+  
+  command "make", :env => env
+  command "make install", :env => env
 end

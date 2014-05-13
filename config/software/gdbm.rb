@@ -16,22 +16,25 @@
 #
 name "gdbm"
 default_version "1.9.1"
+homepage "https://www.gnu.org/software/gdbm/"
 
-source :url => "http://ftp.gnu.org/gnu/gdbm/gdbm-1.9.1.tar.gz",
-       :md5 => "59f6e4c4193cb875964ffbe8aa384b58"
+version "1.9.1" do
+  source md5: "59f6e4c4193cb875964ffbe8aa384b58"
+end
 
-relative_path "gdbm-1.9.1"
+source url: "http://ftp.gnu.org/gnu/gdbm/gdbm-#{version}.tar.gz"
+
+relative_path "gdbm-#{version}"
+
+env = "LDFLAGS" => "-L#{install_dir}/embedded/lib -I#{install_dir}/embedded/include",
+      "CFLAGS" => "-L#{install_dir}/embedded/lib -I#{install_dir}/embedded/include"
 
 build do
   configure_command = ["./configure",
                        "--enable-libgdbm-compat",
                        "--prefix=#{install_dir}/embedded"]
-
-  if platform == "freebsd"
-    configure_command << "--with-pic"
-  end
-
-  command configure_command.join(" ")
-  command "make -j #{max_build_jobs}"
-  command "make install"
+  command configure_command.join(" "), :env => env
+  
+  command "make", :env => env
+  command "make install", :env => env
 end

@@ -16,28 +16,24 @@
 #
 name "xproto"
 default_version "7.0.25"
+homepage "http://http://www.x.org/"
 
-source :url => 'http://xorg.freedesktop.org/releases/individual/proto/xproto-7.0.25.tar.gz',
-  :md5 => 'a47db46cb117805bd6947aa5928a7436'
+version "7.0.25" do
+  source md5: "a47db46cb117805bd6947aa5928a7436"
+end
 
-relative_path 'xproto-7.0.25'
+source url: "http://xorg.freedesktop.org/releases/individual/proto/xproto-#{version}.tar.gz"
 
-configure_env =
-  case platform
-  when "mac_os_x"
-    {
-      "LDFLAGS" => "-L#{install_dir}/embedded/lib -I#{install_dir}/embedded/include",
-      "CFLAGS" => "-I#{install_dir}/embedded/include -L#{install_dir}/embedded/lib"
-    }
-  else
-    {
-      "LDFLAGS" => "-L#{install_dir}/embedded/lib -I#{install_dir}/embedded/include",
-      "CFLAGS" => "-I#{install_dir}/embedded/include -L#{install_dir}/embedded/lib"
-    }
-  end
+relative_path "xproto-#{version}"
+
+env = "LDFLAGS" => "-L#{install_dir}/embedded/lib -I#{install_dir}/embedded/include",
+      "CFLAGS" => "-L#{install_dir}/embedded/lib -I#{install_dir}/embedded/include"
 
 build do
-  command "./configure --prefix=#{install_dir}/embedded", :env => configure_env
-  command "make -j #{max_build_jobs}", :env => configure_env
-  command "make -j #{max_build_jobs} install", :env => configure_env
+  configure_command = ["./configure",
+                       "--prefix=#{install_dir}/embedded"]
+  command configure_command.join(" "), :env => env
+  
+  command "make", :env => env
+  command "make install", :env => env
 end

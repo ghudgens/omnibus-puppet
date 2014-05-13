@@ -15,40 +15,31 @@
 # limitations under the License.
 #
 name "makedepend"
-version "1.0.5"
-
-source :url => 'http://xorg.freedesktop.org/releases/individual/util/makedepend-1.0.5.tar.gz',
-  :md5 => 'efb2d7c7e22840947863efaedc175747'
-
-relative_path 'makedepend-1.0.5'
+default_version "1.0.5"
+homepage "http://www.xfree86.org/current/makedepend.1.html"
 
 dependency "xproto"
-dependency 'util-macros'
-dependency 'pkg-config'
+dependency "util-macros"
+dependency "pkg-config"
 
-configure_env =
-  case platform
-  when "mac_os_x"
-    {
-      "LDFLAGS" => "-L#{install_dir}/embedded/lib -I#{install_dir}/embedded/include",
-      "CFLAGS" => "-I#{install_dir}/embedded/include -L#{install_dir}/embedded/lib"
-    }
-  else
-    {
-      "LDFLAGS" => "-L#{install_dir}/embedded/lib -I#{install_dir}/embedded/include",
-      "CFLAGS" => "-I#{install_dir}/embedded/include -L#{install_dir}/embedded/lib"
-    }
-  end
+version "1.0.5" do
+  source md5: "efb2d7c7e22840947863efaedc175747"
+end
 
-configure_env["PKG_CONFIG_PATH"] = "#{install_dir}/embedded/lib/pkgconfig" +
-  File::PATH_SEPARATOR +
-  "#{install_dir}/embedded/share/pkgconfig"
+source url: "http://downloads.sourceforge.net/project/libpng/zlib/#{version}/zlib-#{version}.tar.gz"
 
-# For pkg-config
-configure_env["PATH"] = "#{install_dir}/embedded/bin" + File::PATH_SEPARATOR + ENV["PATH"]
+relative_path "makedepend-#{version}"
+
+env = "LDFLAGS" => "-L#{install_dir}/embedded/lib -I#{install_dir}/embedded/include",
+      "CFLAGS" => "-L#{install_dir}/embedded/lib -I#{install_dir}/embedded/include",
+      "PKG_CONFIG_PATH" => "#{install_dir}/embedded/lib/pkgconfig" + File::PATH_SEPARATOR + "#{install_dir}/embedded/share/pkgconfig",
+      "PATH" => "#{install_dir}/embedded/bin" + File::PATH_SEPARATOR + ENV["PATH"]
 
 build do
-  command "./configure --prefix=#{install_dir}/embedded", :env => configure_env
-  command "make -j #{max_build_jobs}", :env => configure_env
-  command "make -j #{max_build_jobs} install", :env => configure_env
+  configure_command = ["./configure",
+                       "--prefix=#{install_dir}/embedded"]
+  command configure_command.join(" "), :env => env
+  
+  command "make", :env => env
+  command "make install", :env => env
 end
