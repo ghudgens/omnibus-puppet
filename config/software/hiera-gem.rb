@@ -14,12 +14,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-name "facter-gem"
-default_version "2.0.1"
+name "hiera-gem"
+default_version "1.3.2"
 
 dependency "ruby"
 dependency "rubygems"
 
 build do
-  gem "install facter -n #{install_dir}/bin --no-rdoc --no-ri -v #{version}"
+  gem "install hiera -n #{install_dir}/embedded/bin --no-rdoc --no-ri -v #{version}"
 end

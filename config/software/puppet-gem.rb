@@ -19,7 +19,6 @@ default_version "3.5.1"
 
 dependency "ruby"
 dependency "rubygems"
-dependency "facter-gem"
 
 build do
   gem "install hiera -n #{install_dir}/embedded/bin --no-rdoc --no-ri -v '1.3.2'"
