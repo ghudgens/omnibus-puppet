@@ -16,7 +16,6 @@
 #
 name "ruby"
 default_version "2.0.0-p451"
-homepage "http://www.ruby-lang.org/"
 
 dependency "zlib"
 dependency "ncurses"

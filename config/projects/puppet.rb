@@ -15,7 +15,6 @@
 # limitations under the License.
 #
 name 'puppet'
-friendly_name 'Puppet Agent'
 maintainer 'Grant Hudgens'
 homepage 'https://github.com/ghudgens/omnibus-puppet'
 

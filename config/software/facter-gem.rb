@@ -16,7 +16,6 @@
 #
 name "facter-gem"
 default_version "2.0.1"
-homepage "http://puppetlabs.com/"
 
 dependency "ruby"
 dependency "rubygems"
