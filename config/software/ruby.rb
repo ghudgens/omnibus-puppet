@@ -33,8 +33,8 @@ source url: "http://cache.ruby-lang.org/pub/ruby/#{version.match(/^(\d+\.\d+)/)[
 
 relative_path "ruby-#{version}"
 
-env = "LDFLAGS" => "-L#{install_dir}/embedded/lib -I#{install_dir}/embedded/include",
-      "CFLAGS" => "-L#{install_dir}/embedded/lib -I#{install_dir}/embedded/include  -O3 -g -pipe"
+env = { "LDFLAGS" => "-L#{install_dir}/embedded/lib -I#{install_dir}/embedded/include",
+        "CFLAGS" => "-L#{install_dir}/embedded/lib -I#{install_dir}/embedded/include  -O3 -g -pipe"}
 
 build do
   configure_command = ["./configure",
