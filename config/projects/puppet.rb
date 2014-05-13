@@ -15,19 +15,20 @@
 # limitations under the License.
 #
 name 'puppet'
-maintainer 'CHANGE ME'
-homepage 'CHANGEME.com'
+friendly_name 'Puppet Agent'
+maintainer 'Grant Hudgens'
+homepage 'https://github.com/ghudgens/omnibus-puppet'
 
 replaces        'puppet'
 install_path    '/opt/puppet'
-build_version   Omnibus::BuildVersion.new.semver
+build_version   '3.5.1'
 build_iteration 1
 
 # creates required build directories
 dependency 'preparation'
 
 # puppet dependencies/components
-# dependency 'somedep'
+dependency 'puppet-gem'
 
 # version manifest file
 dependency 'version-manifest'
