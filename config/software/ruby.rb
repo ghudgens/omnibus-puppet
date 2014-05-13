@@ -26,7 +26,7 @@ dependency "libiconv"
 dependency "gdbm"
 
 version "2.0.0-p451" do
-  source md5: "908e4d1dbfe7362b15892f16af05adf8"
+  source md5: "9227787a9636551f1749ee8394b5ffe5"
 end
 
 source url: "http://ftp.ruby-lang.org/pub/ruby/#{version.match(/^(\d+\.\d+)/)[0]}/ruby-#{version}.tar.gz"
