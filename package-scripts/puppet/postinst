@@ -34,15 +34,15 @@ fi
 
 # Move config files to /etc
 if [ ! -d $CONFIG_DIR ] ; then
-  mv $DEST_DIR/embedded/etc/puppet $CONFIG_DIR || error_exit "Cannot move to $DEST_DIR/embedded/etc/puppet to $CONFIG_DIR"
+  mv $DEST_DIR/embedded/etc/puppet $CONFIG_DIR || error_exit "Cannot move $DEST_DIR/embedded/etc/puppet to $CONFIG_DIR"
 elif [ ! -e $CONFIG_DIR/puppet.conf ] ; then
-  mv $DEST_DIR/embedded/etc/puppet/puppet.conf /etc/puppet/puppet.conf || error_exit "Cannot move to $DEST_DIR/embedded/etc/puppet/puppet.conf to /etc/puppet/puppet.conf"
+  mv $DEST_DIR/embedded/etc/puppet/puppet.conf /etc/puppet/puppet.conf || error_exit "Cannot move $DEST_DIR/embedded/etc/puppet/puppet.conf to /etc/puppet/puppet.conf"
 fi
 if [ ! -e /etc/default/puppet ] ; then
-  mv $DEST_DIR/embedded/etc/default/puppet /etc/default/puppet || error_exit "Cannot move to $DEST_DIR/embedded/etc/default/puppet to /etc/default/puppet"
+  mv $DEST_DIR/embedded/etc/default/puppet /etc/default/puppet || error_exit "Cannot move $DEST_DIR/embedded/etc/default/puppet to /etc/default/puppet"
 fi
 if [ ! -e /etc/init.d/puppet ] ; then
-  mv $DEST_DIR/embedded/etc/init.d/puppet /etc/init.d/puppet || error_exit "Cannot move to $DEST_DIR/embedded/etc/init.d/puppet to /etc/init.d/puppet"
+  mv $DEST_DIR/embedded/etc/init.d/puppet /etc/init.d/puppet || error_exit "Cannot move $DEST_DIR/embedded/etc/init.d/puppet to /etc/init.d/puppet"
 fi
 chmod 755 /etc/init.d/puppet
 

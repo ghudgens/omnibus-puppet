@@ -14,11 +14,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-name "puppet-files"
+name "puppetmaster-files"
 
 dependency "puppet-gem"
 
-files_path = File.expand_path("files/puppet", Omnibus.project_root)
+files_path = File.expand_path("files/puppetmaster", Omnibus.project_root)
 
 config_dir = "#{install_dir}/embedded/etc/puppet"
 default_dir = "#{install_dir}/embedded/etc/default"
@@ -37,10 +37,10 @@ build do
   # Generate default config if it does not exist.
   command "mkdir -p #{default_dir}"
   command "rm -f #{default_dir}/puppet"
-  command "cp -a #{files_path}/puppet.default #{default_dir}/puppet"
+  command "cp -a #{files_path}/puppetmaster.default #{default_dir}/puppetmaster"
 
   # Generate init script if it does not exist.
   command "mkdir -p #{init_dir}"
   command "rm -f #{init_dir}/puppet"
-  command "cp -a #{files_path}/puppet.init #{init_dir}/puppet"
+  command "cp -a #{files_path}/puppetmaster.init #{init_dir}/puppetmaster"
 end
