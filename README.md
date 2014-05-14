@@ -1,8 +1,10 @@
 Puppet Omnibus project
 ======================
 This project creates full-stack platform-specific packages for `puppet` and `puppetmaster`!
-Puppet master package includes configuration for Unicorn Rack server and Nginx.
-Embedded ruby version can be specified in config/projects/puppet(master).rb
+
+This project was designed to be used in a more "enterprisey" environment where dependency versions must be controlled.
+As such Ruby, and other Gems used by Puppet are locked into specific versions inside config/projects/puppet(master).rb
+This also means the Puppet Master package includes configuration for Unicorn Rack server and Nginx to handle larger agent loads.
 
 Installation
 ------------
