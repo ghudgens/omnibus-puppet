@@ -26,12 +26,12 @@ default_dir = "/etc/default"
 build do
   # Generate config if it does not exist.
   FileUtils.mkdir_p("#{config_dir}")
-  unless File.exist?(config_path)
+  unless File.exist?("#{config_dir}/puppet.conf")
     command "cp -a ./puppet.conf #{config_dir}/puppet.conf"
   end
 
   # Generate default config if it does not exist.
-  unless File.exist?(default_path)
+  unless File.exist?("#{default_dir}/puppet")
     command "cp -a ./puppet.default #{default_dir}/puppet"
   end
 end
