@@ -2,9 +2,9 @@ Puppet Omnibus project
 ======================
 This project creates full-stack platform-specific packages for `puppet` and `puppetmaster`!
 
-This project was designed to be used in a more "enterprisey" environment where dependency versions must be controlled.
-As such Ruby, and other Gems used by Puppet are locked into specific versions inside config/projects/puppet(master).rb
-This also means the Puppet Master package includes configuration for Unicorn Rack server and Nginx to handle larger agent loads.
+As this project was designed to be used in a more "enterprisey" environment, the following are implemented: 
+* All dependencies, including Ruby, listed in a project are locked to a specific version override.
+* The puppetmaster package configures Unicorn and Nginx to handle larger agent loads.
 
 Installation
 ------------
@@ -62,6 +62,6 @@ $ bin/omnibus help
 
 ### Notes
 
-Currently only supports Debian.  Ubuntu, CentOS, SLES, Windows, and MacOS will be worked in later.
-Currently only Puppet 3.5.1 is tested.
-Puppet Master build is still todo...
+* Currently only supports Debian.  Ubuntu, CentOS, SLES, Windows, and MacOS will be worked in later.
+* Currently only Puppet 3.5.1 is tested.
+* Puppet Master build is still todo...
