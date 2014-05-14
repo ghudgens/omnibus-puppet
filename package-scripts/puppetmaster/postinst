@@ -28,7 +28,7 @@ ln -sf $DEST_DIR/bin/facter $PREFIX/bin || error_exit "Cannot link facter to $PR
 if ! getent passwd puppet > /dev/null; then
   adduser --quiet --system --group --home $VAR_DIR  \
     --no-create-home                                 \
-    --gecos "Puppet configuration management daemon" \
+    --gecos "Puppet Master configuration management daemon" \
     puppet
 fi
 
@@ -39,10 +39,10 @@ elif [ ! -e $CONFIG_DIR/puppet.conf ] ; then
   mv $DEST_DIR/embedded/etc/puppet/puppet.conf /etc/puppet/puppet.conf || error_exit "Cannot move to $DEST_DIR/embedded/etc/puppet/puppet.conf to /etc/puppet/puppet.conf"
 fi
 if [ ! -e /etc/default/puppet ] ; then
-  mv $DEST_DIR/embedded/etc/default/puppet /etc/default/puppet || error_exit "Cannot move to $DEST_DIR/embedded/etc/default/puppet to /etc/default/puppet"
+  mv $DEST_DIR/embedded/etc/default/puppetmaster /etc/default/puppetmaster || error_exit "Cannot move to $DEST_DIR/embedded/etc/default/puppet to /etc/default/puppet"
 fi
 if [ ! -e /etc/init.d/puppet ] ; then
-  mv $DEST_DIR/embedded/etc/init.d/puppet /etc/init.d/puppet || error_exit "Cannot move to $DEST_DIR/embedded/etc/init.d/puppet to /etc/init.d/puppet"
+  mv $DEST_DIR/embedded/etc/init.d/puppetmaster /etc/init.d/puppetmaster || error_exit "Cannot move to $DEST_DIR/embedded/etc/init.d/puppet to /etc/init.d/puppet"
 fi
 chmod 755 /etc/init.d/puppet
 
@@ -57,6 +57,6 @@ chown puppet:puppet $VAR_DIR || error_exit "Cannot change permissions of $VAR_DI
 chown puppet:puppet $VAR_DIR/state || error_exit "Cannot change permissions of $VAR_DIR/state"
 chown puppet:puppet $LOG_DIR || error_exit "Cannot change permissions of $LOG_DIR"
 
-echo "Thank you for installing puppet!"
+echo "Thank you for installing puppetmaster!"
 
 exit 0

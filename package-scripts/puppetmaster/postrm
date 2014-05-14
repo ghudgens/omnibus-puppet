@@ -39,6 +39,6 @@ else
 
 fi
 
-echo "puppet has been uninstalled!"
+echo "puppetmaster has been uninstalled!"
 
 exit 0
