@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# Perform necessary puppet setup steps after package is installed.
+# Perform necessary puppetmaster setup steps after package is installed.
 #
 
 PROGNAME=$(basename $0)
@@ -44,7 +44,7 @@ fi
 if [ ! -e /etc/init.d/puppet ] ; then
   mv $DEST_DIR/embedded/etc/init.d/puppetmaster /etc/init.d/puppetmaster || error_exit "Cannot move $DEST_DIR/embedded/etc/init.d/puppetmaster to /etc/init.d/puppetmaster"
 fi
-chmod 755 /etc/init.d/puppet
+chmod 755 /etc/init.d/puppetmaster
 
 # Create puppet directories
 mkdir -m 750 -p $VAR_DIR || error_exit "Cannot create $VAR_DIR"
