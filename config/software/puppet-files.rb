@@ -24,17 +24,14 @@ config_dir = "#{install_dir}/embedded/etc/puppet"
 default_dir = "#{install_dir}/embedded/etc/default"
 
 build do
-  # Create an etc directory.
-  FileUtils.mkdir_p("#{install_dir}/embedded/etc")
-
   # Generate config if it does not exist.
-  FileUtils.mkdir_p("#{config_dir}")
+  command "mkdir -p #{config_dir}"
   unless File.exist?("#{config_dir}/puppet.conf")
     command "cp -a ./puppet.conf #{config_dir}/puppet.conf"
   end
 
   # Generate default config if it does not exist.
-  FileUtils.mkdir_p("#{default_dir}")
+  command "mkdir -p #{default_dir}"
   unless File.exist?("#{default_dir}/puppet")
     command "cp -a ./puppet.default #{default_dir}/puppet"
   end
