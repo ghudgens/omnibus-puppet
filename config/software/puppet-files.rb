@@ -20,10 +20,13 @@ dependency "puppet-gem"
 
 source :path => File.expand_path("files/puppet", Omnibus.project_root)
 
-config_dir = "#{install_dir}/etc/puppet"
-default_dir = "#{install_dir}/etc/default"
+config_dir = "#{install_dir}/embedded/etc/puppet"
+default_dir = "#{install_dir}/embedded/etc/default"
 
 build do
+  # Create an etc directory.
+  FileUtils.mkdir_p("#{install_dir}/embedded/etc")
+
   # Generate config if it does not exist.
   FileUtils.mkdir_p("#{config_dir}")
   unless File.exist?("#{config_dir}/puppet.conf")
