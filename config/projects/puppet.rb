@@ -38,6 +38,9 @@ dependency 'facter-gem'
 dependency 'puppet-gem'
 dependency 'hiera-gem'
 
+#Puppet and its dependencies' configuration/misc files
+dependency 'puppet-files'
+
 #Version manifest file
 dependency 'version-manifest'
 

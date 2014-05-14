@@ -5,8 +5,11 @@
 
 PROGNAME=`basename $0`
 INSTALLER_DIR=`dirname $0`
-DEST_DIR=/opt/puppet
-CONFIG_DIR=/etc/puppet
+DEST_DIR="/opt/puppet"
+CONFIG_DIR="/etc/puppet"
+VAR_DIR="/var/lib/puppet"
+LOG_DIR="/var/log/puppet"
+PREFIX="/usr"
 USAGE="usage: $0"
 
 error_exit()
@@ -15,7 +18,7 @@ error_exit()
   exit 1
 }
 
-# move the actual files into place
+# Move the actual files into place
 rm -rf $DEST_DIR/* || error_exit "Cannot remove contents of $DEST_DIR"
 mkdir -p $DEST_DIR || error_exit "Cannot create $DEST_DIR"
 cp -R $INSTALLER_DIR $DEST_DIR || error_exit "Cannot install to $DEST_DIR"
