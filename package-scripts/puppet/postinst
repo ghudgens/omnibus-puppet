@@ -40,6 +40,10 @@ fi
 if [ ! -e /etc/default/puppet ] ; then
   mv $DEST_DIR/embedded/etc/default/puppet /etc/default/puppet || error_exit "Cannot move to $DEST_DIR/embedded/etc/default/puppet to /etc/default/puppet"
 fi
+if [ ! -e /etc/init.d/puppet ] ; then
+  mv $DEST_DIR/embedded/etc/init.d/puppet /etc/init.d/puppet || error_exit "Cannot move to $DEST_DIR/embedded/etc/init.d/puppet to /etc/init.d/puppet"
+fi
+chmod 755 /etc/init.d/puppet
 
 # Create puppet directories
 mkdir -m 750 -p $VAR_DIR || error_exit "Cannot create $VAR_DIR"
@@ -50,13 +54,6 @@ mkdir -m 750 -p $LOG_DIR || error_exit "Cannot create $LOG_DIR"
 chown puppet:puppet $VAR_DIR || error_exit "Cannot change permissions of $VAR_DIR"
 chown puppet:puppet $VAR_DIR/state || error_exit "Cannot change permissions of $VAR_DIR/state"
 chown puppet:puppet $LOG_DIR || error_exit "Cannot change permissions of $LOG_DIR"
-
-# TODO: Remove and put it in puppet-files
-if [ ! -e /etc/init.d/puppet ] ; then
-  PUPPET_GEM_DIR=`ls -dr ${DEST_DIR}/embedded/lib/ruby/gems/*/gems/puppet-* | head -1`
-  cp ${PUPPET_GEM_DIR}/ext/debian/puppet.init /etc/init.d/puppet
-  chmod 755 /etc/init.d/puppet
-fi
 
 echo "Thank you for installing puppet!"
 
