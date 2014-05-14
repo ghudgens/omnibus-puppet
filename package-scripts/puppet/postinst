@@ -21,8 +21,8 @@ rm -f $PREFIX/bin/puppet
 rm -f $PREFIX/bin/facter
 
 #Link binaries
-ln -sf $INSTALLER_DIR/bin/puppet $PREFIX/bin || error_exit "Cannot link puppet to $PREFIX/bin"
-ln -sf $INSTALLER_DIR/bin/facter $PREFIX/bin || error_exit "Cannot link facter to $PREFIX/bin"
+ln -sf $DEST_DIR/bin/puppet $PREFIX/bin || error_exit "Cannot link puppet to $PREFIX/bin"
+ln -sf $DEST_DIR/bin/facter $PREFIX/bin || error_exit "Cannot link facter to $PREFIX/bin"
 
 # Create the "puppet" user if it does not already exist
 if ! getent passwd puppet > /dev/null; then
@@ -30,6 +30,15 @@ if ! getent passwd puppet > /dev/null; then
     --no-create-home                                 \
     --gecos "Puppet configuration management daemon" \
     puppet
+fi
+
+# Move config files to /etc
+mkdir -p $CONFIG_DIR
+if [ ! -e /etc/puppet/puppet.conf ] ; then
+  mv $DEST_DIR/embedded/etc/puppet $CONFIG_DIR || error_exit "Cannot move to $DEST_DIR/embedded/etc/puppet to $CONFIG_DIR"
+fi
+if [ ! -e /etc/default/puppet ] ; then
+  mv $DEST_DIR/embedded/etc/default/puppet $CONFIG_DIR/puppet || error_exit "Cannot move to $DEST_DIR/embedded/etc/default/puppet to $CONFIG_DIR/puppet"
 fi
 
 # Create puppet directories
