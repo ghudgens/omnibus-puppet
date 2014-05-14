@@ -1,7 +1,8 @@
 Puppet Omnibus project
 ======================
-This project creates full-stack platform-specific packages for
-`puppet` and `puppetmaster`!
+This project creates full-stack platform-specific packages for `puppet` and `puppetmaster`!
+Puppet master package includes configuration for Unicorn Rack server and Nginx.
+Embedded ruby version can be specified in config/projects/puppet(master).rb
 
 Installation
 ------------
@@ -59,4 +60,5 @@ $ bin/omnibus help
 
 ### Notes
 
-Currently only built for Debian.  Ubuntu, CentOS, SLES, Windows, and MacOS will be worked in later.
+Currently only supports Debian.  Ubuntu, CentOS, SLES, Windows, and MacOS will be worked in later.
+Currently only Puppet 3.5.1 is tested.
