@@ -22,7 +22,7 @@ homepage 'http://puppetlabs.com/'
 replaces        'puppet'
 install_path    '/opt/puppet'
 build_version   '3.5.1'
-build_iteration 00
+build_iteration 0
 
 #Specify dependency versions to embed
 override :'ruby', version: "2.0.0-p451"
