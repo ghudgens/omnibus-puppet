@@ -15,24 +15,29 @@
 # limitations under the License.
 #
 name 'puppet'
-maintainer 'Grant Hudgens'
-homepage 'https://github.com/ghudgens/omnibus-puppet'
+maintainer 'Puppet Labs'
+homepage 'http://puppetlabs.com/'
 
+#Package attributes
 replaces        'puppet'
 install_path    '/opt/puppet'
 build_version   '3.5.1'
 build_iteration 00
 
-# creates required build directories
+#Specify Ruby version to embed
+override :ruby, version: '2.0.0-p451'
+
+#Creates required build directories
 dependency 'preparation'
 
-# puppet dependencies/components
+#Puppet dependencies/components
 dependency 'facter-gem'
 dependency 'puppet-gem'
 dependency 'hiera-gem'
 
-# version manifest file
+#Version manifest file
 dependency 'version-manifest'
 
+#Ignore git crap
 exclude '\.git*'
 exclude 'bundler\/git'
