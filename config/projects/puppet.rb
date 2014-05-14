@@ -25,10 +25,10 @@ build_version   '3.5.1'
 build_iteration 00
 
 #Specify dependency versions to embed
-override :ruby, version: "2.0.0-p451"
-#override :hiera-gem, version: "1.3.2"
-#override :facter-gem, version: "2.0.1"
-#override :puppet-gem, version: "#{build_version}"
+override :'ruby', version: "2.0.0-p451"
+override :'hiera-gem', version: "1.3.2"
+override :'facter-gem', version: "2.0.1"
+override :'puppet-gem', version: "#{build_version}"
 
 #Creates required build directories
 dependency 'preparation'
