@@ -22,6 +22,7 @@ source :path => File.expand_path("files/puppet", Omnibus.project_root)
 
 config_dir = "#{install_dir}/embedded/etc/puppet"
 default_dir = "#{install_dir}/embedded/etc/default"
+init_dir = "#{install_dir}/embedded/etc/init.d"
 
 build do
   # Generate config if it does not exist.
@@ -34,5 +35,11 @@ build do
   command "mkdir -p #{default_dir}"
   unless File.exist?("#{default_dir}/puppet")
     command "cp -a ./puppet.default #{default_dir}/puppet"
+  end
+
+  # Generate init script if it does not exist.
+  command "mkdir -p #{init_dir}"
+  unless File.exist?("#{init_dir}/puppet")
+    command "cp -a ./puppet.conf #{init_dir}/puppet"
   end
 end
