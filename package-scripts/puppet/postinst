@@ -49,6 +49,7 @@ chmod 755 /etc/init.d/puppet
 # Create puppet directories
 mkdir -m 750 -p $VAR_DIR || error_exit "Cannot create $VAR_DIR"
 mkdir -m 755 -p $VAR_DIR/state || error_exit "Cannot create $VAR_DIR/state"
+mkdir -m 755 -p $VAR_DIR/state || error_exit "Cannot create $VAR_DIR/facts"
 mkdir -m 750 -p $LOG_DIR || error_exit "Cannot create $LOG_DIR"
 
 # Set correct ownership of puppet directories
