@@ -22,6 +22,10 @@ You create a platform-specific package using the `build project` command:
 $ bin/omnibus build project puppet
 ```
 
+```shell
+$ bin/omnibus build project puppetmaster
+```
+
 The platform/architecture type of the package created will match the platform
 where the `build project` command is invoked. For example, running this command
 on a MacBook Pro will generate a Mac OS X package. After the build completes
@@ -55,4 +59,4 @@ $ bin/omnibus help
 
 ### Notes
 
-Currently only built for Debian.  Ubuntu, CentOS, and SLES will be worked in later
+Currently only built for Debian.  Ubuntu, CentOS, SLES, Windows, and MacOS will be worked in later.
