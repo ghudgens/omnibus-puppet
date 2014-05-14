@@ -69,11 +69,6 @@ if [ ! -e /etc/default/puppet ] ; then
   chmod 644 /etc/default/puppet
 fi
 
-# Copy in auth config if none exists already
-if [ ! -e ${CONFIG_DIR}/auth.conf ] ; then
-  cp ${PUPPET_GEM_DIR}/conf/auth.conf ${CONFIG_DIR}/auth.conf
-  chmod 644 ${CONFIG_DIR}/auth.conf
-fi
 echo "Thank you for installing puppet!"
 
 exit 0
