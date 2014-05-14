@@ -27,19 +27,13 @@ init_dir = "#{install_dir}/embedded/etc/init.d"
 build do
   # Generate config if it does not exist.
   command "mkdir -p #{config_dir}"
-  unless File.exist?("#{config_dir}/puppet.conf")
-    command "cp -a #{files_path}/puppet.conf #{config_dir}/puppet.conf"
-  end
+  command "cp -a #{files_path}/puppet.conf #{config_dir}/puppet.conf"
 
   # Generate default config if it does not exist.
   command "mkdir -p #{default_dir}"
-  unless File.exist?("#{default_dir}/puppet")
-    command "cp -a #{files_path}/puppet.default #{default_dir}/puppet"
-  end
+  command "cp -a #{files_path}/puppet.default #{default_dir}/puppet"
 
   # Generate init script if it does not exist.
   command "mkdir -p #{init_dir}"
-  unless File.exist?("#{init_dir}/puppet")
-    command "cp -a #{files_path}/puppet.init #{init_dir}/puppet"
-  end
+  command "cp -a #{files_path}/puppet.init #{init_dir}/puppet"
 end
