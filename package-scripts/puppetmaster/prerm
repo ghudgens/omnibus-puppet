@@ -1,0 +1,22 @@
+#!/bin/bash
+#
+# Perform necessary puppet removal steps prior to package removal
+#
+
+PROGNAME=$(basename $0)
+DEST_DIR="/opt/puppet"
+CONFIG_DIR="/etc/puppet"
+VAR_DIR="/var/lib/puppet"
+LOG_DIR="/var/log/puppet"
+PREFIX="/usr"
+
+function error_exit
+{
+  echo "${PROGNAME}: ${1:-"Unknown Error"}" 1>&2
+  exit 1
+}
+
+echo "Stopping puppetmaster"
+/etc/init.d/puppetmaster stop || error_exit "Cannot stop service"
+
+exit 0

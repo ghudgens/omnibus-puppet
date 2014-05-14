@@ -1,0 +1,62 @@
+#!/bin/bash
+#
+# Perform necessary puppet setup steps after package is installed.
+#
+
+PROGNAME=$(basename $0)
+DEST_DIR="/opt/puppet"
+CONFIG_DIR="/etc/puppet"
+VAR_DIR="/var/lib/puppet"
+LOG_DIR="/var/log/puppet"
+PREFIX="/usr"
+
+function error_exit
+{
+  echo "${PROGNAME}: ${1:-"Unknown Error"}" 1>&2
+  exit 1
+}
+
+# rm -f before ln -sf is required for solaris 9
+rm -f $PREFIX/bin/puppet
+rm -f $PREFIX/bin/facter
+
+#Link binaries
+ln -sf $DEST_DIR/bin/puppet $PREFIX/bin || error_exit "Cannot link puppet to $PREFIX/bin"
+ln -sf $DEST_DIR/bin/facter $PREFIX/bin || error_exit "Cannot link facter to $PREFIX/bin"
+
+# Create the "puppet" user if it does not already exist
+if ! getent passwd puppet > /dev/null; then
+  adduser --quiet --system --group --home $VAR_DIR  \
+    --no-create-home                                 \
+    --gecos "Puppet configuration management daemon" \
+    puppet
+fi
+
+# Move config files to /etc
+if [ ! -d $CONFIG_DIR ] ; then
+  mv $DEST_DIR/embedded/etc/puppet $CONFIG_DIR || error_exit "Cannot move to $DEST_DIR/embedded/etc/puppet to $CONFIG_DIR"
+elif [ ! -e $CONFIG_DIR/puppet.conf ] ; then
+  mv $DEST_DIR/embedded/etc/puppet/puppet.conf /etc/puppet/puppet.conf || error_exit "Cannot move to $DEST_DIR/embedded/etc/puppet/puppet.conf to /etc/puppet/puppet.conf"
+fi
+if [ ! -e /etc/default/puppet ] ; then
+  mv $DEST_DIR/embedded/etc/default/puppet /etc/default/puppet || error_exit "Cannot move to $DEST_DIR/embedded/etc/default/puppet to /etc/default/puppet"
+fi
+if [ ! -e /etc/init.d/puppet ] ; then
+  mv $DEST_DIR/embedded/etc/init.d/puppet /etc/init.d/puppet || error_exit "Cannot move to $DEST_DIR/embedded/etc/init.d/puppet to /etc/init.d/puppet"
+fi
+chmod 755 /etc/init.d/puppet
+
+# Create puppet directories
+mkdir -m 750 -p $VAR_DIR || error_exit "Cannot create $VAR_DIR"
+mkdir -m 755 -p $VAR_DIR/state || error_exit "Cannot create $VAR_DIR/state"
+mkdir -m 755 -p $VAR_DIR/state || error_exit "Cannot create $VAR_DIR/facts"
+mkdir -m 750 -p $LOG_DIR || error_exit "Cannot create $LOG_DIR"
+
+# Set correct ownership of puppet directories
+chown puppet:puppet $VAR_DIR || error_exit "Cannot change permissions of $VAR_DIR"
+chown puppet:puppet $VAR_DIR/state || error_exit "Cannot change permissions of $VAR_DIR/state"
+chown puppet:puppet $LOG_DIR || error_exit "Cannot change permissions of $LOG_DIR"
+
+echo "Thank you for installing puppet!"
+
+exit 0
