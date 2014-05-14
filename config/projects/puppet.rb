@@ -21,7 +21,7 @@ homepage 'https://github.com/ghudgens/omnibus-puppet'
 replaces        'puppet'
 install_path    '/opt/puppet'
 build_version   '3.5.1'
-build_iteration 1
+build_iteration 00
 
 # creates required build directories
 dependency 'preparation'
