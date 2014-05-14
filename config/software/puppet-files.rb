@@ -40,6 +40,6 @@ build do
   # Generate init script if it does not exist.
   command "mkdir -p #{init_dir}"
   unless File.exist?("#{init_dir}/puppet")
-    command "cp -a #{files_path}/puppet.conf #{init_dir}/puppet"
+    command "cp -a #{files_path}/puppet.init #{init_dir}/puppet"
   end
 end
