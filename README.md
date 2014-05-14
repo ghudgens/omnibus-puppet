@@ -4,7 +4,7 @@ This project creates full-stack platform-specific packages for `puppet` and `pup
 
 As this project was designed to be used in a more "enterprisey" environment, the following are implemented: 
 * All dependencies, including Ruby, listed in a project are locked to a specific version override.
-* The puppetmaster package configures Unicorn and Nginx to handle larger agent loads.
+* The puppetmaster package configures Passenger and Nginx to handle larger agent loads.
 
 Installation
 ------------
