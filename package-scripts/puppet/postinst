@@ -33,17 +33,17 @@ fi
 # Set correct permissions and ownership for puppet directories
 if [ ! -d "$VAR_DIR" ]; then
   mkdir -m 750 $VAR_DIR
-  chown puppet puppet $VAR_DIR
+  chown puppet:puppet $VAR_DIR
 fi
 
 if [ ! -d "$VAR_DIR/state" ]; then
-  mkdir -m 755 $VAR_DIR
-  chown puppet puppet $VAR_DIR
+  mkdir -m 755 $VAR_DIR/state
+  chown puppet:puppet $VAR_DIR
 fi
 
 if [ ! -d "$LOG_DIR" ]; then
   mkdir -m 750 $LOG_DIR
-  chown puppet puppet $LOG_DIR
+  chown puppet:puppet $LOG_DIR
 fi
 
 # Create config if it doesn't exist
