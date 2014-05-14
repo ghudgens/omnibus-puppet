@@ -64,3 +64,4 @@ $ bin/omnibus help
 
 Currently only supports Debian.  Ubuntu, CentOS, SLES, Windows, and MacOS will be worked in later.
 Currently only Puppet 3.5.1 is tested.
+Puppet Master build is still todo...
