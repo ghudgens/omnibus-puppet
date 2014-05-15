@@ -51,6 +51,7 @@ fi
 chmod 755 /etc/init.d/puppetmaster
 
 # Create puppet directories
+echo "Creating var directories"
 mkdir -m 750 -p $VAR_DIR || error_exit "Cannot create $VAR_DIR"
 mkdir -m 755 -p $VAR_DIR/state || error_exit "Cannot create $VAR_DIR/state"
 mkdir -m 755 -p $VAR_DIR/state || error_exit "Cannot create $VAR_DIR/facts"
