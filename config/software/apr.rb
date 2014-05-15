@@ -30,8 +30,11 @@ env = { "LDFLAGS" => "-L#{install_dir}/embedded/lib -I#{install_dir}/embedded/in
         "PATH" => "#{install_dir}/embedded/bin:#{ENV["PATH"]}"}
 
 build do
+  # Ensure the following directories exist
+  
   configure_command = ["./configure",
-                       "--prefix=#{install_dir}/embedded"]
+                       "--prefix=#{install_dir}/embedded",
+                       "--with-installbuilddir=#{install_dir}/embedded/share/apr-1/build"]
 
   command configure_command.join(" "), :env => env
   
