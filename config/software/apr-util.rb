@@ -41,7 +41,7 @@ build do
                        "--with-apr=#{install_dir}/embedded",
                        "--with-gdbm=#{install_dir}/embedded",
                        "--with-openssl=#{install_dir}/embedded",
-                       "--with-crypto"
+                       "--with-crypto"]
 
   command configure_command.join(" "), :env => env
   
