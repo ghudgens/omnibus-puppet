@@ -17,6 +17,7 @@
 name "apr-util"
 default_version "1.5.3"
 
+dependency "apr"
 dependency "openssl"
 dependency "gdbm"
 
@@ -36,7 +37,11 @@ build do
   # Ensure the following directories exist
   
   configure_command = ["./configure",
-                       "--prefix=#{install_dir}/embedded"]
+                       "--prefix=#{install_dir}/embedded",
+                       "--with-apr=#{install_dir}/embedded",
+                       "--with-gdbm=#{install_dir}/embedded",
+                       "--with-openssl=#{install_dir}/embedded",
+                       "--with-crypto"
 
   command configure_command.join(" "), :env => env
   
