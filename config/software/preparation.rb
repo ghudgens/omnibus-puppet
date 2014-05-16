@@ -13,14 +13,14 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-#name "preparation"
-description "the steps required to preprare the build"
+#
+name "preparation"
+description "The steps required to preprare the build"
 
 build do
   block do
     %w{embedded/bin embedded/etc/default embedded/etc/init.d embedded/lib bin}.each do |dir|
-      dir_fullpath = File.expand_path(File.join(#{install_dir}, dir))
-      
+      command "mkdir -p #{install_dir}/#{dir}"
     end
   end
 end
