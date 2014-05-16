@@ -19,7 +19,6 @@ maintainer 'Puppet Labs'
 homepage 'http://puppetlabs.com/'
 
 #Package attributes
-replaces        'puppet'
 install_path    '/opt/puppet'
 build_version   '3.5.1'
 build_iteration 0
@@ -28,6 +27,7 @@ build_iteration 0
 override :'ruby', version: "2.0.0-p451"
 override :'hiera-gem', version: "1.3.2"
 override :'facter-gem', version: "2.0.1"
+override :'passenger-gem', version: "4.0.42"
 override :'puppet-gem', version: "#{build_version}"
 
 #Creates required build directories
@@ -37,6 +37,7 @@ dependency 'preparation'
 dependency 'facter-gem'
 dependency 'puppet-gem'
 dependency 'hiera-gem'
+dependency 'passenger-gem'
 
 #Puppet Master and its dependencies' configuration/misc files
 dependency 'puppetmaster-files'
