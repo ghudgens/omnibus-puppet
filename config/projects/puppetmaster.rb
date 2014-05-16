@@ -29,8 +29,6 @@ override :'ruby', version: "2.0.0-p451"
 override :'hiera-gem', version: "1.3.2"
 override :'facter-gem', version: "2.0.1"
 override :'puppet-gem', version: "#{build_version}"
-override :'apr', version: "1.5.1"
-override :'apr-util', version: "1.5.3"
 
 #Creates required build directories
 dependency 'preparation'
@@ -39,8 +37,6 @@ dependency 'preparation'
 dependency 'facter-gem'
 dependency 'puppet-gem'
 dependency 'hiera-gem'
-dependency 'apr'
-dependency 'apr-util'
 
 #Puppet Master and its dependencies' configuration/misc files
 dependency 'puppetmaster-files'
