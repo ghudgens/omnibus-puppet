@@ -17,9 +17,20 @@
 name "passenger-gem"
 default_version "4.0.42"
 
+nginx_support = false
+
 dependency "ruby"
 dependency "rubygems"
 
+env = { "LDFLAGS" => "-L#{install_dir}/embedded/lib -I#{install_dir}/embedded/include",
+        "CFLAGS" => "-L#{install_dir}/embedded/lib -I#{install_dir}/embedded/include",
+        "PATH" => "#{install_dir}/embedded/bin:#{ENV['PATH']}"}
+
 build do
   gem "install passenger -n #{install_dir}/embedded/bin --no-rdoc --no-ri -v #{version}"
+
+  if nginx_support == true
+    # Compile Phusion Passenger support files for Nginx
+    rake "nginx", :env => env
+  end
 end
