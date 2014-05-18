@@ -22,11 +22,11 @@ Usage
 You create a platform-specific package using the `build project` command:
 
 ```shell
-$ bin/omnibus build project puppet
+$ bin/omnibus build puppet
 ```
 
 ```shell
-$ bin/omnibus build project puppetmaster
+$ bin/omnibus build puppetmaster
 ```
 
 The platform/architecture type of the package created will match the platform
