@@ -34,6 +34,9 @@ override :'puppet-gem', version: "#{build_version}"
 # Creates required build directories
 dependency 'preparation'
 
+# Compile Passenger support files for nginx
+override :'passenger-gem', nginx_support: true
+
 # Puppet Master dependencies/components
 dependency 'facter-gem'
 dependency 'puppet-gem'
