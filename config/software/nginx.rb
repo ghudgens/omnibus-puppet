@@ -38,11 +38,6 @@ source url: "http://nginx.org/download/nginx-#{version}.tar.gz"
 
 relative_path "nginx-#{version}"
 
-passenger_root_cmd = Mixlib::ShellOut.new("#{install_dir}/embedded/bin/passenger-config --root")
-passenger_root_cmd.run_command
-passenger_root_cmd.error!
-passenger_root_path = passenger_root_cmd.stdout
-
 env = { "LDFLAGS" => "-L#{install_dir}/embedded/lib -I#{install_dir}/embedded/include",
         "CFLAGS" => "-L#{install_dir}/embedded/lib -I#{install_dir}/embedded/include",
         "LD_RUN_PATH" => "#{install_dir}/embedded/lib"}
@@ -57,7 +52,7 @@ build do
                        "--with-http_ssl_module",
                        "--with-http_stub_status_module",
                        "--with-http_gzip_static_module",
-                       "--add-module=#{passenger_root_path}/ext/nginx",
+                       "--add-module=`#{install_dir}/embedded/bin/passenger-config --root`/ext/nginx",
                        "--with-debug"]
 
   command configure_command.join(" "), :env => env
