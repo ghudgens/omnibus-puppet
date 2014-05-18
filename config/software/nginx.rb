@@ -17,7 +17,6 @@
 name "nginx"
 default_version "1.6.0"
 
-dependency "ruby"
 dependency "passenger-gem"
 dependency "pcre"
 dependency "openssl"
