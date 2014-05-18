@@ -40,7 +40,8 @@ relative_path "nginx-#{version}"
 
 env = { "LDFLAGS" => "-L#{install_dir}/embedded/lib -I#{install_dir}/embedded/include",
         "CFLAGS" => "-L#{install_dir}/embedded/lib -I#{install_dir}/embedded/include",
-        "LD_RUN_PATH" => "#{install_dir}/embedded/lib"}
+        "LD_RUN_PATH" => "#{install_dir}/embedded/lib",
+        "PATH" => "#{install_dir}/embedded/bin:#{ENV["PATH"]}"}
 
 # TODO: This really needs to be more dynamic...
 passenger_root = "#{install_dir}/embedded/lib/ruby/gems/2.0.0/gems/passenger-4.0.42"
