@@ -18,12 +18,12 @@ name 'puppetmaster'
 maintainer 'Puppet Labs'
 homepage 'http://puppetlabs.com/'
 
-#Package attributes
+# Package attributes
 install_path    '/opt/puppet'
 build_version   '3.5.1'
 build_iteration 0
 
-#Specify dependency versions to embed
+# Specify dependency versions to embed
 override :'ruby', version: "2.0.0-p451"
 override :'hiera-gem', version: "1.3.2"
 override :'facter-gem', version: "2.0.1"
@@ -31,22 +31,22 @@ override :'passenger-gem', version: "4.0.42"
 override :'nginx', version: "1.6.0"
 override :'puppet-gem', version: "#{build_version}"
 
-#Creates required build directories
+# Creates required build directories
 dependency 'preparation'
 
-#Puppet Master dependencies/components
+# Puppet Master dependencies/components
 dependency 'facter-gem'
 dependency 'puppet-gem'
 dependency 'hiera-gem'
 dependency 'passenger-gem'
 dependency 'nginx'
 
-#Puppet Master and its dependencies' configuration/misc files
+# Puppet Master and its dependencies' configuration/misc files
 dependency 'puppetmaster-files'
 
-#Version manifest file
+# Version manifest file
 dependency 'version-manifest'
 
-#Ignore git crap
+# Ignore git crap
 exclude '\.git*'
 exclude 'bundler\/git'
