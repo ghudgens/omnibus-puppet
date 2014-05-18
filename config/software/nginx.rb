@@ -56,7 +56,7 @@ build do
                        "--with-http_ssl_module",
                        "--with-http_stub_status_module",
                        "--with-http_gzip_static_module",
-                       "--add-module=#{install_dir}/embedded/lib/ruby/gems/#{ruby_cmpt.version.split("-p")[0]}/gems/passenger-#{version}/ext/nginx",
+                       "--add-module=#{install_dir}/embedded/lib/ruby/gems/#{ruby_cmpt.version.split("-p")[0]}/gems/passenger-#{pgem_cmpt.version}/ext/nginx",
                        "--with-debug"]
 
   command configure_command.join(" "), :env => env
