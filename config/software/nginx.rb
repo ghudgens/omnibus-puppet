@@ -37,8 +37,9 @@ source url: "http://nginx.org/download/nginx-#{version}.tar.gz"
 
 relative_path "nginx-#{version}"
 
-env = { "LDFLAGS" => "-L#{install_dir}/embedded/lib -I#{install_dir}/embedded/include",
-        "CFLAGS" => "-L#{install_dir}/embedded/lib -I#{install_dir}/embedded/include",
+env = { #"LDFLAGS" => "-L#{install_dir}/embedded/lib -I#{install_dir}/embedded/include",
+        #"CFLAGS" => "-L#{install_dir}/embedded/lib -I#{install_dir}/embedded/include",
+        #"CCFLAGS" => "-L#{install_dir}/embedded/lib -I#{install_dir}/embedded/include",
         "LD_RUN_PATH" => "#{install_dir}/embedded/lib",
         "PATH" => "#{install_dir}/embedded/bin:#{ENV["PATH"]}"}
 
@@ -57,6 +58,8 @@ build do
                        "--with-http_stub_status_module",
                        "--with-http_gzip_static_module",
                        "--add-module=#{install_dir}/embedded/lib/ruby/gems/#{ruby_cmpt.version.split("-p")[0]}/gems/passenger-#{pgem_cmpt.version}/ext/nginx",
+                       "--with-ld-opt=-L#{install_dir}/embedded/lib",
+                       "--with-cc-opt=\"-L#{install_dir}/embedded/lib -I#{install_dir}/embedded/include\"",
                        "--with-debug"]
 
   command configure_command.join(" "), :env => env
