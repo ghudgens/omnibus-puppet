@@ -26,14 +26,15 @@ env = { "LDFLAGS" => "-L#{install_dir}/embedded/lib -I#{install_dir}/embedded/in
         "CFLAGS" => "-L#{install_dir}/embedded/lib -I#{install_dir}/embedded/include",
         "PATH" => "#{install_dir}/embedded/bin:#{ENV['PATH']}"}
 
-# Grab the ruby component as we will be using it later
+# Grab the ruby and nginx components as we will be using them in the build
 ruby_cmpt  = project.library.components.find { |c| c.name == 'ruby' }
+nginx_cmpt = project.library.components.find { |c| c.name == 'nginx' }
 
 build do
   gem "install passenger -n #{install_dir}/embedded/bin --no-rdoc --no-ri -v #{version}"
 
-  if nginx_support == true
-    # Compile Phusion Passenger support files for Nginx
+  #If nginx exists in the project, compile the Phusion Passenger support files.
+  unless nginx_cmpt == ''
     command "rake nginx", 
             :cwd => "#{install_dir}/embedded/lib/ruby/gems/#{ruby_cmpt.version.split("-p")[0]}/gems/passenger-#{version}",
             :env => env
