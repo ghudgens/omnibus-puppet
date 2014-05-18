@@ -34,7 +34,7 @@ version "1.6.0" do
   source md5: "8efa354f1c3c2ccf434a50d3fbe82340"
 end
 
-source url: "http://nginx.org/download/nginx-#{version}.tar.gz",
+source url: "http://nginx.org/download/nginx-#{version}.tar.gz"
 
 relative_path "nginx-#{version}"
 
