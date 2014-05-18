@@ -36,7 +36,7 @@ end
 
 source url: "http://nginx.org/download/nginx-#{version}.tar.gz",
 
-relative_path "nginx-#{version}"]
+relative_path "nginx-#{version}"
 
 passenger_root_cmd = Mixlib::ShellOut.new("#{install_dir}/embedded/bin/passenger-config --root")
 passenger_root_cmd.run_command
