@@ -42,8 +42,9 @@ env = { "LDFLAGS" => "-L#{install_dir}/embedded/lib -I#{install_dir}/embedded/in
         "LD_RUN_PATH" => "#{install_dir}/embedded/lib",
         "PATH" => "#{install_dir}/embedded/bin:#{ENV["PATH"]}"}
 
-# TODO: This really needs to be more dynamic...
-passenger_root = "#{install_dir}/embedded/lib/ruby/gems/2.0.0/gems/passenger-4.0.42"
+# Grab the ruby and passenger-gem components as we will be using them in the configure
+ruby_cmpt = project.library.components.find { |c| c.name == 'ruby' }
+pgem_cmpt = project.library.components.find { |c| c.name == 'passenger-gem' }
 
 build do
   configure_command = ["./configure",
@@ -55,7 +56,7 @@ build do
                        "--with-http_ssl_module",
                        "--with-http_stub_status_module",
                        "--with-http_gzip_static_module",
-                       "--add-module=#{passenger_root}/ext/nginx",
+                       "--add-module=#{install_dir}/embedded/lib/ruby/gems/#{ruby_cmpt.version.split("-p")[0]}/gems/passenger-#{version}/ext/nginx",
                        "--with-debug"]
 
   command configure_command.join(" "), :env => env
