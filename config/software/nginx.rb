@@ -17,9 +17,11 @@
 name "nginx"
 default_version "1.6.0"
 
-dependency "passenger-gem"
+dependency "curl"
 dependency "pcre"
 dependency "openssl"
+dependency "passenger-gem"
+dependency "addressable-gem"
 
 version "1.4.4" do
   source md5: "5dfaba1cbeae9087f3949860a02caa9f"
@@ -37,11 +39,13 @@ source url: "http://nginx.org/download/nginx-#{version}.tar.gz"
 
 relative_path "nginx-#{version}"
 
-env = { #"LDFLAGS" => "-L#{install_dir}/embedded/lib -I#{install_dir}/embedded/include",
-        #"CFLAGS" => "-L#{install_dir}/embedded/lib -I#{install_dir}/embedded/include",
-        #"CCFLAGS" => "-L#{install_dir}/embedded/lib -I#{install_dir}/embedded/include",
-        "LD_RUN_PATH" => "#{install_dir}/embedded/lib",
-        "PATH" => "#{install_dir}/embedded/bin:#{ENV["PATH"]}"}
+env = { "LD_RUN_PATH"     => "#{install_dir}/embedded/lib",
+        "PATH"            => "#{install_dir}/embedded/bin:#{ENV["PATH"]}",
+        "BUNDLE_BIN_PATH" => "#{install_dir}/embedded/bin/bundle",
+        "RUBYOPT"         => nil,
+        "BUNDLE_GEMFILE"  => nil,
+        "GEM_PATH"        => nil,
+        "GEM_HOME"        => nil}
 
 # Grab the ruby and passenger-gem components as we will be using them in the configure
 ruby_cmpt = project.library.components.find { |c| c.name == 'ruby' }

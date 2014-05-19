@@ -17,31 +17,9 @@
 name "passenger-gem"
 default_version "4.0.42"
 
-# Grab the ruby and nginx components as we will be using them in the build
-ruby_cmpt  = project.library.components.find { |c| c.name == 'ruby' }
-nginx_cmpt = project.library.components.find { |c| c.name == 'nginx' }
-
 dependency "ruby"
 dependency "rubygems"
 
-unless nginx_cmpt == ''
-  dependency "bundler"
-  dependency "addressable-gem"
-  dependency "curl"
-end
-
-env = { "LDFLAGS" => "-L#{install_dir}/embedded/lib -I#{install_dir}/embedded/include",
-        "CFLAGS" => "-L#{install_dir}/embedded/lib -I#{install_dir}/embedded/include",
-        "PATH" => "#{install_dir}/embedded/bin:#{ENV['PATH']}",
-        "BUNDLE_BIN_PATH" => "#{install_dir}/embedded/bin/bundle"}
-
 build do
   gem "install passenger -n #{install_dir}/embedded/bin --no-rdoc --no-ri -v #{version}"
-
-  #If nginx exists in the project, compile the Phusion Passenger support files.
-  unless nginx_cmpt == ''
-    rake "nginx", 
-      :cwd => "#{install_dir}/embedded/lib/ruby/gems/#{ruby_cmpt.version.split("-p")[0]}/gems/passenger-#{version}",
-      :env => env
-  end
 end
