@@ -42,6 +42,7 @@ dependency 'passenger-gem'
 dependency 'nginx'
 
 # Puppet Master and its dependencies' configuration/misc files
+dependency 'nginx-files'
 dependency 'puppet-files'
 
 # Version manifest file
