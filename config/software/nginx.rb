@@ -52,8 +52,6 @@ ruby_cmpt = project.library.components.find { |c| c.name == 'ruby' }
 pgem_cmpt = project.library.components.find { |c| c.name == 'passenger-gem' }
 
 build do
-  unless 
-
   configure_command = ["./configure",
                        "--prefix=#{install_dir}/embedded",
                        "--with-http_ssl_module",
