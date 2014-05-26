@@ -52,15 +52,20 @@ ruby_cmpt = project.library.components.find { |c| c.name == 'ruby' }
 pgem_cmpt = project.library.components.find { |c| c.name == 'passenger-gem' }
 
 build do
+  unless 
+
   configure_command = ["./configure",
                        "--prefix=#{install_dir}/embedded",
                        "--with-http_ssl_module",
                        "--with-http_stub_status_module",
                        "--with-http_gzip_static_module",
-                       "--add-module=#{install_dir}/embedded/lib/ruby/gems/#{ruby_cmpt.version.split("-p")[0]}/gems/passenger-#{pgem_cmpt.version}/ext/nginx",
                        "--with-ld-opt=-L#{install_dir}/embedded/lib",
                        "--with-cc-opt=\"-L#{install_dir}/embedded/lib -I#{install_dir}/embedded/include\"",
                        "--with-debug"]
+
+  unless ruby_cmpt.nil? || pgem_cmpt.nil?
+    configure_command << "--add-module=#{install_dir}/embedded/lib/ruby/gems/#{ruby_cmpt.version.split("-p")[0]}/gems/passenger-#{pgem_cmpt.version}/ext/nginx"
+  end
 
   command configure_command.join(" "), :env => env
   
