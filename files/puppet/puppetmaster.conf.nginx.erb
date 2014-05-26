@@ -1,6 +1,6 @@
 server {
   listen                     8140 ssl;
-  server_name                localhost;
+  server_name                tmp_hostname tmp_fqdn;
 
   passenger_enabled          on;
   passenger_set_cgi_param    HTTP_X_CLIENT_DN $ssl_client_s_dn; 
@@ -10,8 +10,8 @@ server {
 
   root                       <%= install_dir  %>/embedded/share/puppet/public;
 
-  ssl_certificate            /etc/puppet/ssl/certs/localhost.local.pem;
-  ssl_certificate_key        /etc/puppet/ssl/private_keys/localhost.local.pem;
+  ssl_certificate            /etc/puppet/ssl/certs/tmp_fqdn.pem;
+  ssl_certificate_key        /etc/puppet/ssl/private_keys/tmp_fqdn.pem;
   ssl_crl                    /etc/puppet/ssl/ca/ca_crl.pem;
   ssl_client_certificate     /etc/puppet/ssl/certs/ca.pem;
   ssl_ciphers                SSLv2:-LOW:-EXPORT:RC4+RSA;
