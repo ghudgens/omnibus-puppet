@@ -41,7 +41,7 @@ elif [ ! -e $CONFIG_DIR/puppet.conf ] ; then
   mv $DEST_DIR/embedded/etc/puppet/puppet.conf /etc/puppet/puppet.conf || error_exit "Cannot move $DEST_DIR/embedded/etc/puppet/puppet.conf to /etc/puppet/puppet.conf"
 fi
 if [ ! -e /etc/default/puppet ] ; then
-  echo "Creating /etc/default/puppetmaster file"
+  echo "Creating /etc/default/puppet file"
   mv $DEST_DIR/embedded/etc/default/puppet /etc/default/puppet || error_exit "Cannot move $DEST_DIR/embedded/etc/default/puppet to /etc/default/puppet"
 fi
 if [ ! -e /etc/init.d/puppet ] ; then
