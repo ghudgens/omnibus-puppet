@@ -19,7 +19,6 @@ maintainer 'Puppet Labs'
 homepage 'http://puppetlabs.com/'
 
 #Package attributes
-replaces        'puppet'
 install_path    '/opt/puppet'
 build_version   '3.5.1'
 build_iteration 0
