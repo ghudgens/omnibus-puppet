@@ -10,10 +10,10 @@ server {
 
   root                       <%= install_dir  %>/embedded/share/puppet/public;
 
-  ssl_certificate            /etc/puppet/ssl/certs/tmp_fqdn.pem;
-  ssl_certificate_key        /etc/puppet/ssl/private_keys/tmp_fqdn.pem;
-  ssl_crl                    /etc/puppet/ssl/ca/ca_crl.pem;
-  ssl_client_certificate     /etc/puppet/ssl/certs/ca.pem;
+  ssl_certificate            /var/lib/puppet/ssl/certs/tmp_fqdn.pem;
+  ssl_certificate_key        /var/lib/puppet/ssl/private_keys/tmp_fqdn.pem;
+  ssl_crl                    /var/lib/puppet/ssl/ca/ca_crl.pem;
+  ssl_client_certificate     /var/lib/puppet/ssl/certs/ca.pem;
   ssl_ciphers                SSLv2:-LOW:-EXPORT:RC4+RSA;
   ssl_prefer_server_ciphers  on;
   ssl_verify_client          optional;
