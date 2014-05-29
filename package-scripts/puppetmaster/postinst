@@ -36,7 +36,7 @@ fi
 
 # Create the "nginx" user if it does not already exist
 if ! getent passwd nginx > /dev/null; then
-  adduser --quiet --system --group --home $VAR_DIR  \
+  adduser --quiet --system --group --home $RACK_DIR  \
     --no-create-home                                 \
     --gecos "Puppet Master configuration management daemon" \
     nginx
