@@ -47,7 +47,7 @@ build do
     command "rm -f #{webapp_dir}/*"
     command "mkdir -p #{webapp_dir}/public"
     command "mkdir -p #{webapp_dir}/tmp"
-    unless ruby_cmpt.nil? || pgem_cmpt
+    unless ruby_cmpt.nil? || pgem_cmpt.nil?
       command " cp -a #{install_dir}/embedded/lib/ruby/gems/#{ruby_cmpt.version.split("-p")[0]}/gems/puppet-#{pgem_cmpt.version}/ext/rack/config.ru #{webapp_dir}/"
     end
 
