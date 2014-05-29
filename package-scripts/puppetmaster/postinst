@@ -34,16 +34,8 @@ if ! getent passwd puppet > /dev/null; then
     puppet
 fi
 
-# Create the "nginx" user if it does not already exist
-if ! getent passwd nginx > /dev/null; then
-  adduser --quiet --system --group --home $RACK_DIR  \
-    --no-create-home                                 \
-    --gecos "Puppet Master configuration management daemon" \
-    nginx
-fi
-
 #Make sure that the nginx user owns the rack directory
-chown -R nginx:nginx $RACK_DIR
+chown -R puppet:puppet $RACK_DIR
 
 # Move config files to /etc
 if [ ! -d $CONFIG_DIR ] ; then
@@ -85,7 +77,7 @@ touch $PM_LOG_DIR/nginx/access.log
 chown puppet:puppet $VAR_DIR || error_exit "Cannot change permissions of $VAR_DIR"
 chown puppet:puppet $VAR_DIR/state || error_exit "Cannot change permissions of $VAR_DIR/state"
 chown puppet:puppet $LOG_DIR || error_exit "Cannot change permissions of $LOG_DIR"
-chown -R nginx:nginx $PM_LOG_DIR/nginx || error_exit "Cannot change permissions of $PM_LOG_DIR/nginx"
+chown -R puppet:puppet $PM_LOG_DIR/nginx || error_exit "Cannot change permissions of $PM_LOG_DIR/nginx"
 
 # Change temp hostnames in puppet.conf
 NGINX_PM_CONF="$DEST_DIR/embedded/etc/nginx/conf.d/puppetmaster.conf"
