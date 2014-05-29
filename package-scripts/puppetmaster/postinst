@@ -7,7 +7,7 @@ PROGNAME=$(basename $0)
 DEST_DIR="/opt/puppet"
 CONFIG_DIR="/etc/puppet"
 VAR_DIR="/var/lib/puppet"
-LOG_DIR="/var/log/puppet"
+LOG_DIR="/var/log/puppetmaster"
 PREFIX="/usr"
 RACK_DIR="$DEST_DIR/embedded/share/puppet"
 
@@ -67,7 +67,12 @@ echo "Creating var directories"
 mkdir -m 750 -p $VAR_DIR || error_exit "Cannot create $VAR_DIR"
 mkdir -m 755 -p $VAR_DIR/state || error_exit "Cannot create $VAR_DIR/state"
 mkdir -m 755 -p $VAR_DIR/facts || error_exit "Cannot create $VAR_DIR/facts"
+echo "Creating log directories"
 mkdir -m 750 -p $LOG_DIR || error_exit "Cannot create $LOG_DIR"
+mkdir -m 750 -p $LOG_DIR/nginx || error_exit "Cannot create $LOG_DIR/nginx"
+touch $LOG_DIR/nginx/error.log
+touch $LOG_DIR/nginx/access.log
+chown -R nginx:nginx $LOG_DIR/nginx
 
 # Set correct ownership of puppet directories
 chown puppet:puppet $VAR_DIR || error_exit "Cannot change permissions of $VAR_DIR"
