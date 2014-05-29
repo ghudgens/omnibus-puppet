@@ -25,6 +25,10 @@ default_dir = "#{install_dir}/embedded/etc/default"
 init_dir    = "#{install_dir}/embedded/etc/init.d"
 webapp_dir  = "#{install_dir}/embedded/share/puppet"
 
+# Grab the ruby component as we will need the ruby version.
+ruby_cmpt = project.library.components.find { |c| c.name == 'ruby' }
+pgem_cmpt = project.library.components.find { |c| c.name == 'puppet-gem' }
+
 build do
   # Generate config directories.
   command "mkdir -p #{config_dir}"
@@ -43,7 +47,9 @@ build do
     command "rm -f #{webapp_dir}/*"
     command "mkdir -p #{webapp_dir}/public"
     command "mkdir -p #{webapp_dir}/tmp"
-    #command "cp -a #{files_dir}/config.ru #{webapp_dir}/"
+    unless ruby_cmpt.nil? || pgem_cmpt
+      command " cp -a #{install_dir}/embedded/lib/ruby/gems/#{ruby_cmpt.version.split("-p")[0]}/gems/puppet-#{pgem_cmpt.version}/ext/rack/config.ru #{webapp_dir}/"
+    end
 
     #Generate Nginx server configuration file.
     block do
