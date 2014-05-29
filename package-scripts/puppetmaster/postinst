@@ -61,7 +61,12 @@ if [ ! -e /etc/init.d/puppet ] ; then
   echo "Creating /etc/init.d/puppet file"
   mv $DEST_DIR/embedded/etc/init.d/puppet /etc/init.d/puppet || error_exit "Cannot move $DEST_DIR/embedded/etc/init.d/puppet to /etc/init.d/puppet"
 fi
+if [ ! -e /etc/init.d/nginx ] ; then
+  echo "Creating /etc/init.d/puppet file"
+  mv $DEST_DIR/embedded/etc/init.d/nginx /etc/init.d/nginx || error_exit "Cannot move $DEST_DIR/embedded/etc/init.d/nginx to /etc/init.d/nginx"
+fi
 chmod 755 /etc/init.d/puppet
+chmod 755 /etc/init.d/nginx
 
 # Create puppet directories
 echo "Creating var directories"
