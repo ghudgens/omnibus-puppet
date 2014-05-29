@@ -76,11 +76,13 @@ chown puppet:puppet $LOG_DIR || error_exit "Cannot change permissions of $LOG_DI
 
 # Change temp hostnames in puppet.conf
 NGINX_PM_CONF="$DEST_DIR/embedded/etc/nginx/conf.d/puppetmaster.conf"
+PUP_CONF="$CONFIG_DIR/puppet.conf"
 TMP_FILE="/tmp/out.tmp.$$"
 HNAME=$(hostname)
 FQDN=$(hostname -f)
 sed "s/tmp_hostname/$HNAME/g" "$NGINX_PM_CONF" > $TMP_FILE && mv $TMP_FILE "$NGINX_PM_CONF"
 sed "s/tmp_fqdn/$FQDN/g" "$NGINX_PM_CONF" > $TMP_FILE && mv $TMP_FILE "$NGINX_PM_CONF"
+sed "s/tmp_fqdn/$FQDN/g" "$PUP_CONF" > $TMP_FILE && mv $TMP_FILE "$PUP_CONF"
 
 echo "Thank you for installing puppetmaster!"
 
