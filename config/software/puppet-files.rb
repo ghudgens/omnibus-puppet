@@ -25,6 +25,8 @@ default_dir = "#{install_dir}/embedded/etc/default"
 init_dir    = "#{install_dir}/embedded/etc/init.d"
 webapp_dir  = "#{install_dir}/embedded/share/puppet"
 
+project_name = project.name
+
 # Grab the ruby component as we will need the ruby version.
 ruby_cmpt = project.library.components.find { |c| c.name == 'ruby' }
 pgem_cmpt = project.library.components.find { |c| c.name == 'puppet-gem' }
