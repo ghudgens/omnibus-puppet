@@ -17,7 +17,10 @@
 name "puppet-files"
 
 dependency "puppet-gem"
-dependency "nginx-files"
+
+if project.name == "puppetmaster"
+  dependency "nginx-files"
+end
 
 files_dir   = File.expand_path("files/puppet", Omnibus.project_root)
 config_dir  = "#{install_dir}/embedded/etc/puppet"
