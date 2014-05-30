@@ -46,6 +46,7 @@ build do
   if project.name == "puppetmaster"
     #Generate Puppet configuration file.
     command "cp -a #{files_dir}/puppet.conf.master #{config_dir}/puppet.conf"
+    command "cp -a #{files_dir}/site.pp #{config_dir}/manifests/site.pp"
 
     # Generate webapp directory and copy over Rack config.
     command "mkdir -p #{webapp_dir}"
