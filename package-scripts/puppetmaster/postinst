@@ -34,8 +34,10 @@ if ! getent passwd puppet > /dev/null; then
     puppet
 fi
 
-#Make sure that the nginx user owns the rack directory
+#Make sure that the puppet user owns the var, rack, and config dirs
+chown -R puppet:puppet $VAR_DIR
 chown -R puppet:puppet $RACK_DIR
+chown -R puppet:puppet $CONFIG_DIR
 
 # Move config files to /etc
 if [ ! -d $CONFIG_DIR ] ; then
