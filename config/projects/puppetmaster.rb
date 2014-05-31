@@ -28,6 +28,7 @@ override :'ruby', version: "2.0.0-p451"
 override :'hiera-gem', version: "1.3.2"
 override :'facter-gem', version: "2.0.1"
 override :'passenger-gem', version: "4.0.42"
+override :'librarian-puppet-gem', version: "1.0.2"
 override :'nginx', version: "1.6.0"
 override :'puppet-gem', version: "#{build_version}"
 
@@ -35,6 +36,7 @@ override :'puppet-gem', version: "#{build_version}"
 dependency 'preparation'
 
 # Puppet Master dependencies/components
+dependency 'librarian-puppet-gem'
 dependency 'facter-gem'
 dependency 'puppet-gem'
 dependency 'hiera-gem'
