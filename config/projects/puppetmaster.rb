@@ -21,7 +21,7 @@ homepage 'http://puppetlabs.com/'
 # Package attributes
 install_path    '/opt/puppet'
 build_version   '3.5.1'
-build_iteration 0
+build_iteration 1
 
 # Specify dependency versions to embed
 override :'ruby', version: "2.0.0-p451"
