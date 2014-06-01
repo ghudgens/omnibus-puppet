@@ -23,6 +23,7 @@ rm -f $PREFIX/bin/facter
 #Link binaries
 ln -sf $DEST_DIR/bin/puppet $PREFIX/bin || error_exit "Cannot link puppet to $PREFIX/bin"
 ln -sf $DEST_DIR/bin/facter $PREFIX/bin || error_exit "Cannot link facter to $PREFIX/bin"
+ln -sf $DEST_DIR/bin/librarian-puppet $PREFIX/bin || error_exit "Cannot link librarian-puppet to $PREFIX/bin"
 
 # Create the "puppet" user if it does not already exist
 if ! getent passwd puppet > /dev/null; then
