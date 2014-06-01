@@ -16,7 +16,10 @@ function error_exit
   exit 1
 }
 
-echo "Stopping puppetmaster"
-/etc/init.d/puppetmaster stop || error_exit "Cannot stop service"
+echo "Stopping puppet"
+/etc/init.d/puppet stop || error_exit "Cannot stop service"
+
+echo "Stopping nginx"
+/etc/init.d/nginx stop || error_exit "Cannot stop service"
 
 exit 0

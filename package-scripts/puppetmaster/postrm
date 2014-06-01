@@ -29,6 +29,7 @@ elif [ $1 -eq "remove" ] || [ $1 -eq "upgrade" ] || [ $1 -eq "failed-upgrade" ] 
   # Remove link for binaries
   rm -f $PREFIX/bin/puppet
   rm -f $PREFIX/bin/facter
+  rm -f $DEST_DIR/bin/librarian-puppet
   # Remove init script
   rm -f /etc/init.d/puppetmaster
   # Remove installed directory
