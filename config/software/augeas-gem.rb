@@ -17,6 +17,7 @@
 name "augeas-gem"
 default_version "0.5.0"
 
+dependency "augeas"
 dependency "ruby"
 dependency "rubygems"
 
