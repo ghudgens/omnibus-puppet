@@ -19,7 +19,7 @@ default_version "1.2.0"
 
 
 version "1.2.0" do
-  source md5: "9227787a9636551f1749ee8394b5ffe5"
+  source md5: "dce2f52cbd20f72c7da48e014ad48076"
 end
 
 source url: "http://download.augeas.net/augeas-#{version}.tar.gz"
