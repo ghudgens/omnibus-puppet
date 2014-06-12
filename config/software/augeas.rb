@@ -17,6 +17,7 @@
 name "augeas"
 default_version "1.2.0"
 
+dependency "readline"
 
 version "1.2.0" do
   source md5: "dce2f52cbd20f72c7da48e014ad48076"
